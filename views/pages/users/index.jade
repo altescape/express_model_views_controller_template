@@ -1,0 +1,15 @@
+extends ../../layout
+
+block content
+
+  .col-sm-4.col-sm-offset-4
+    h3 Users 
+
+    if (!user)
+      ul.list-inline
+        li: a(href='/users/login', class='btn btn-primary') Login
+        li: a(href='/users/register', class='btn btn-default') Register
+
+    if (user)
+      p You are currently logged in as #{user.username}
+      p: a(href='/users/logout', class='btn btn-primary') Logout
