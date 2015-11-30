@@ -13,26 +13,13 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// env
+require('dotenv').load();
 
 var app = express();
 app.enable('strict routing');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// routes/views setup
+// routes & views
 var core = require('./routes/core'),
     index = require('./routes/index'),
     admin = require('./routes/admin'),
@@ -46,14 +33,22 @@ var db = mongoose.connect(config.db, function(err) {
   }
 });
 
-// routes
-app.use('/', core, index);
-app.use('/admin', admin);
-app.use('/users', users);
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(require('express-promise')());
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // sessions
 app.use(session({
-  secret: 'big fat oranges',
+  secret: 'a secret key',
   store: new MongoStore({
     mongooseConnection: mongoose.connection
   }),
@@ -70,6 +65,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// routes
+app.use('/', core, index);
+app.use('/admin', admin);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

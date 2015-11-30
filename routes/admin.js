@@ -4,10 +4,10 @@ var express = require('express'),
     entries = require('../controllers/entries.server.controller');
 
 app.route('/')
-  .get(admin.isRequired, admin.index);
+  .get(admin.index);
 
 // render entries page
 app.route('/entries')
-  .get(admin.isRequired, entries.admin);
+  .get(admin.isRequired, admin.entries);
 
 module.exports = app;

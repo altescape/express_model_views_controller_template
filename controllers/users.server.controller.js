@@ -4,17 +4,17 @@ var express = require('express'),
     app = express.Router();
 
 exports.index = function(req, res) {
-  res.render('users/index', { user : req.user });
+  res.render('pages/users/index', { user : req.user });
 };
 
 exports.register = function(req, res) {
-  res.render('users/register', {});
+  res.render('pages/users/register', {});
 };
 
 exports.createUser = function(req, res) {
   User.register(new User({ username : req.body.username }), req.body.password, function(err, user) {
     if (err) {
-      return res.render('users/register', {
+      return res.render('pages/users/register', {
         info: 'Sorry. That username already exists. Try again.'
       });
     }
@@ -28,7 +28,7 @@ exports.login = function(req, res) {
   if (req.user) {
     res.redirect('/users');
   } else {
-    res.render('users/login', { user : req.user });
+    res.render('pages/users/login', { user : req.user });
   }
 };
 

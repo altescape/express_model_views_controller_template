@@ -1,7 +1,23 @@
 nav(id='nav' role='navigation')
   .block
-    ul.main-nav
+    ul.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          button(type="button" 
+          class="navbar-toggle collapsed" 
+          data-toggle="collapse" 
+          data-target="#bs-example-navbar-collapse-1" 
+          aria-expanded="false")
+            span(class="sr-only") Toggle navigation
+            span(class="icon-bar")
+            span(class="icon-bar")
+            span(class="icon-bar")
 
-      //- First Link
-      li(ui-sref-active='active')
-        a(ui-sref='index' class='cursor') First Link
+          a(class="navbar-brand" href="#")
+            img(alt="Brand" src="images/blackbox.png")
+
+        .collapse.navbar-collapse(id="bs-example-navbar-collapse-1")
+          .nav.navbar-nav
+            li: a(href='/' class='cursor') Home 
+            li: a(href='/admin' class='cursor') Admin 
+            li: a(href='/users' class='cursor') Users 

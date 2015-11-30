@@ -2,6 +2,9 @@ var express = require('express'),
     app = express();
 
 // Do not change anything below this lot
+//
+// This is for rendering the partials and pages stored in sub-directory
+
 // Partial views
 app.get('/views/partials/:name', function(req, res) {
   var name = req.params.name;

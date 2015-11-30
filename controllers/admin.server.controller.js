@@ -2,7 +2,11 @@ var express = require('express'),
     app = express.Router();
 
 exports.index = function(req, res) {
-  res.render('admin/entries');
+  res.render('pages/admin/index');
+};
+
+exports.entries = function(req, res) {
+  res.render('pages/admin/entries');
 };
 
 // Middleware
