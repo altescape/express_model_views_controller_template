@@ -6,6 +6,14 @@ Run
 ---
 
 ```
+npm update
+```
+
+```
+bower install 
+```
+
+```
 nodemon
 ```
 
